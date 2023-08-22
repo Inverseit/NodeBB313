@@ -23,8 +23,9 @@ interface Relation {
   href: string;
 }
 
-interface Page {
+export interface Page {
   page: number;
   active: boolean;
   qs: string;
+  separator: boolean,
 }
