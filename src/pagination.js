@@ -27,6 +27,7 @@ exports.create = void 0;
 const _ = __importStar(require("lodash"));
 const qs = __importStar(require("querystring"));
 function create(currentPage, pageCount, queryObj) {
+    console.log(currentPage, pageCount);
     let _currentPage = typeof currentPage === 'string' ? parseInt(currentPage, 10) : currentPage;
     const _pageCount = typeof pageCount === 'string' ? parseInt(pageCount, 10) : pageCount;
     if (pageCount <= 1) {
@@ -106,6 +107,7 @@ function create(currentPage, pageCount, queryObj) {
             href: `?${qs.stringify(Object.assign(Object.assign({}, queryObj), { page: previous }))}`,
         });
     }
+    console.log(data);
     return data;
 }
 exports.create = create;
