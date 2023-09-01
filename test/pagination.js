@@ -15,6 +15,16 @@ describe('Pagination', () => {
         done();
     });
 
+    it('should create empty pagination for 1 page with string', (done) => {
+        const data = pagination.create('1', '1');
+        assert.equal(data.pages.length, 0);
+        assert.equal(data.rel.length, 0);
+        assert.equal(data.pageCount, 1);
+        assert.equal(data.prev.page, 1);
+        assert.equal(data.next.page, 1);
+        done();
+    });
+
     it('should create pagination for 10 pages', (done) => {
         const data = pagination.create(2, 10);
         // [1, (2), 3, 4, 5, separator, 9, 10]
@@ -23,6 +33,39 @@ describe('Pagination', () => {
         assert.equal(data.pageCount, 10);
         assert.equal(data.prev.page, 1);
         assert.equal(data.next.page, 3);
+        done();
+    });
+
+    it('should create pagination for 10 pages with string current page', (done) => {
+        const data = pagination.create('2', 10);
+        // [1, (2), 3, 4, 5, separator, 9, 10]
+        assert.equal(data.pages.length, 8);
+        assert.equal(data.rel.length, 2);
+        assert.equal(data.pageCount, 10);
+        assert.equal(data.prev.page, 1);
+        assert.equal(data.next.page, 3);
+        done();
+    });
+
+    it('should create pagination for 10 pages with string pageCount', (done) => {
+        const data = pagination.create(2, '10');
+        // [1, (2), 3, 4, 5, separator, 9, 10]
+        assert.equal(data.pages.length, 8);
+        assert.equal(data.rel.length, 2);
+        assert.equal(data.pageCount, 10);
+        assert.equal(data.prev.page, 1);
+        assert.equal(data.next.page, 3);
+        done();
+    });
+
+    it('should create pagination for 10 pages with string', (done) => {
+        const data = pagination.create(0, 10);
+        // [(1), 2, 3, 4, 5, separator, 9, 10]
+        assert.equal(data.pages.length, 8);
+        assert.equal(data.rel.length, 1); // there is only next page control
+        assert.equal(data.pageCount, 10);
+        assert.equal(data.prev.page, 1);
+        assert.equal(data.next.page, 2);
         done();
     });
 
