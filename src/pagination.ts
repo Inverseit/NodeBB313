@@ -10,7 +10,7 @@ export function create(
 ): Pagination {
     let _currentPage: number = typeof currentPage === 'string' ? parseInt(currentPage, 10) : currentPage;
     const _pageCount: number = typeof pageCount === 'string' ? parseInt(pageCount, 10) : pageCount;
-    if (pageCount <= 1) {
+    if (_pageCount <= 1) {
         return {
             prev: { page: 1, active: _currentPage > 1 },
             next: { page: 1, active: _currentPage < _pageCount },
